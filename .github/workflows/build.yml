@@ -1,0 +1,16 @@
+name: STM32 Build
+on: [push]
+jobs:
+  build:
+    runs-with: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Toolchain
+        run: sudo apt-get install gcc-arm-none-eabi binutils-arm-none-eabi
+      - name: Build
+        run: make
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-bin-file
+          path: project.bin
